@@ -64,7 +64,16 @@ We welcome contributins! To contribute:
    git push origin feature-branch
 5. Open a Pull Request
 
-License
+## 📜 License
 
-Contact
+This project follows a **hybrid licensing model**:
+
+- The **source code** is available under the **MIT License** (see [LICENSE](LICENSE)).
+- The **review analysis functionality** has usage limits under a commercial license (see [LICENSE_COMMERCIAL.md](LICENSE_COMMERCIAL.md)).
+
+### Free & Paid Plans  
+- **Free**: Analyze up to **2,500 reviews/month**.  
+- **Pro**: Up to **10,000 reviews/month** – **$3.99/month**.  
+- **Unlimited**: No limit – **$5.99/month**.  
+
 
