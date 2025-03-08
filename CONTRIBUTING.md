@@ -57,7 +57,7 @@ If you find a bug, open an issue on GitHub with:
 - Provide **constructive feedback** when reviewing code
 
 ## 📌 Need Help?
-If you havve any questions, feel free to open an **issue** or reach out to  the maintainers.
+If you have any questions, feel free to open an **issue** or reach out to  the maintainers.
 
 
 
