@@ -68,7 +68,7 @@ We welcome contributins! To contribute:
 
 This project follows a **hybrid licensing model**:
 
-- The **source code** is available under the **MIT License** (see [LICENSE](LICENSE)).
+- The **source code** is available under the **MIT License** (see [LICENSE](LICENSE.md)).
 - The **review analysis functionality** has usage limits under a commercial license (see [LICENSE_COMMERCIAL.md](LICENSE_COMMERCIAL.md)).
 
 ### Free & Paid Plans  
