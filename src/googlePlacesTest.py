@@ -1,8 +1,13 @@
 import requests
 import time
+from dotenv import load_dotenv
+import os
 
-API_KEY = "fb478d6d113d758c063ec6b249094f5db10a6ec99f2d10f6583a220f6faf7199"  # Your SerpAPI key
-GOOGLE_API_KEY = "AIzaSyBzkUi-CSSBdrXY7vJmU3vgNYYm-iGl3PM"  # Your Google Places API key
+load_dotenv()
+
+
+API_KEY = os.getenv("API_KEY")  # Your SerpAPI key
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")  # Your Google Places API key
 PLACE_NAME = "Yugo Melbourn Point"  # Change this to any restaurant name
 LOCATION = "Cork, Ireland"  # Optional: Specify city for better accuracy
 
