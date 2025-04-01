@@ -1,4 +1,6 @@
+
 # 📊 Business Reviews Analyzer
+[![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url][![Starts][stars-shield]][stars-url]
 
 ## Introduction
 
@@ -66,14 +68,22 @@ We welcome contributins! To contribute:
 
 ## 📜 License
 
-This project follows a **hybrid licensing model**:
+The **source code** is available under the **GPL 3.0 License** (see [LICENSE](LICENSE.md)).
 
-- The **source code** is available under the **MIT License** (see [LICENSE](LICENSE.md)).
-- The **review analysis functionality** has usage limits under a commercial license (see [LICENSE_COMMERCIAL.md](LICENSE_COMMERCIAL.md)).
+## Acknoledgements
+We would like to express our gratitude to everyone who contributed to this project.
 
-### Free & Paid Plans  
-- **Free**: Analyze up to **2,500 reviews/month**.  
-- **Pro**: Up to **10,000 reviews/month** – **$3.99/month**.  
-- **Unlimited**: No limit – **$5.99/month**.  
+A special thanks to [Mattia Gasparini](https://github.com/gaspa93) and his community for their work on [Google Maps Scraper](https://github.com/gaspa93/googlemaps-scraper), which served as an inspiration and foundation for this project. 
+
+If you’d like to contribute, check out our [CONTRIBUTING.md](CONTRIBUTING.md) and join us in building something great!
+
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/Carlos19uji/review-analyzer
+[contributors-url]: https://github.com/Carlos19uji/review-analyzer/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Carlos19uji/review-analyzer
+[forks-url]: https://github.com/Carlos19uji/review-analyzer/forks
+[stars-shield]: https://img.shields.io/github/stars/Carlos19uji/review-analyzer
+[stars-url]: https://github.com/Carlos19uji/review-analyzer/stargazers
 
 
