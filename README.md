@@ -66,9 +66,24 @@ We welcome contributins! To contribute:
    git push origin feature-branch
 5. Open a Pull Request
 
+## Used Models
+
+This project uses machine learning models from Hugging Face:
+
+- **[DistilBERT-base-uncased-finetuned-SST-2](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english)**  
+  - **License:** Apache 2.0  
+  - **Description:** Model based on DistilBERT for sentiment analysis.  
+
+- **[RoBERTa-base-go_emotions](https://huggingface.co/SamLowe/roberta-base-go_emotions)**  
+  - **License:** MIT  
+  - **Description:** Model based on RoBERTa for emotion classification.
+
 ## 📜 License
 
 The **source code** is available under the **GPL 3.0 License** (see [LICENSE](LICENSE.md)).
+
+### Notes on Licenses:
+This project is distributed under the **GPL 3.0 license**. However, the mentioned models have their own licenses (Apache 2.0 and MIT), which must be respected when using this project.
 
 ## Acknoledgements
 We would like to express our gratitude to everyone who contributed to this project.
@@ -76,6 +91,7 @@ We would like to express our gratitude to everyone who contributed to this proje
 A special thanks to [Mattia Gasparini](https://github.com/gaspa93) and his community for their work on [Google Maps Scraper](https://github.com/gaspa93/googlemaps-scraper), which served as an inspiration and foundation for this project. 
 
 If you’d like to contribute, check out our [CONTRIBUTING.md](CONTRIBUTING.md) and join us in building something great!
+
 
 
 
