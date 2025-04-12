@@ -1,14 +1,20 @@
 from flask import Flask, jsonify, request
-import json
 from AnalyzeReviews import process_reviews, count_words, common_words
 from FilterByWord import find_associated_words
+from Scraper import getReviews
 
 app = Flask(__name__)
 
-@app.route("/results", methods=["GET"])
+##https://www.google.com/maps/place/Yugo+Melbourn+Point+-+Cork+Student+Accommodation/@51.8879257,-8.535235,17z/data=!4m8!3m7!1s0x48449182ecd7bf3f:0x973ce1eed05f526d!8m2!3d51.8879257!4d-8.5326601!9m1!1b1!16s%2Fg%2F11nyqz7rvp?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D##
+
+
+@app.route("/results", methods=["POST"])
 def get_results():
-    analysis_results = process_reviews("hotel_corto.csv")
-    common_words = count_words("hotel_corto.csv")
+
+    url = request.args.get("url")
+    reviews_set = getReviews(url, 1000)
+    analysis_results = process_reviews(reviews_set)
+    common_words = count_words(reviews_set)
 
     print(jsonify({"analysis_results": analysis_results, "common_words": common_words}))
     return jsonify({"analysis_results": analysis_results, "common_words": common_words})
