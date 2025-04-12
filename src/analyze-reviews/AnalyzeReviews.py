@@ -7,6 +7,10 @@ import re
 from multiprocessing import Pool, cpu_count, Manager
 from transformers import pipeline
 from nltk.tokenize import word_tokenize
+from Scraper import getReviews, ind, URL
+from ObtainReviews import GoogleMapsScraper
+import argparse
+from termcolor import colored
 
 noises = [".", ",", "?", ")", "(", ":", ";", "_", "-", " ́", "*", "!", "[", "]", "{", "}", "@", "%"]
 nltk.download("stopwords")
@@ -81,7 +85,7 @@ def analyze_emotions(review, model):
     else:
         return "neutral"
 
-def analyze_review(review_id, review_text, shared_dict):
+def analyze_review(review_id, review_text, relative_date, rating, shared_dict):
     if not review_text.strip():
         return None, None
 
@@ -90,40 +94,18 @@ def analyze_review(review_id, review_text, shared_dict):
     sentiment = analyze_sentiment(clean_text, shared_dict["classifier"])
     emotion = analyze_emotions(clean_text, shared_dict["emotion_classifier_extended"])
 
-    print(f"Review: {review_text}, Sentiment: {sentiment}, Emotion: {emotion}")
-    return review_id, {"text": clean_text, "sentiment": sentiment, "emotion": emotion}
-
-def process_reviews(file):
-    df = pd.read_csv(file)
-
-    if "review_text" not in df.columns:
-        raise KeyError("The CSV file must contain a 'review_text' column.")
-
-    num_processes = cpu_count() - 1
-    print(f"Using {num_processes} processes in parallel")
-
-    with Manager() as manager:
-        shared_dict = manager.dict()
-        load_models(shared_dict)
-
-        with Pool(num_processes) as pool:
-            results = pool.starmap(analyze_review, [(id, review, shared_dict) for id, review in enumerate(df["review_text"].fillna(""))])
-
-        reviews_map = {review_id: data for review_id, data in results if review_id is not None}
-
-    print(f"Reviews map: {reviews_map}")
-    return reviews_map
+    print(f"Review: {review_text}, Sentiment: {sentiment}, Emotion: {emotion}, Relative Date: {relative_date}, Rating: {rating}")
+    return review_id, {"text": clean_text, "sentiment": sentiment, "emotion": emotion, "date": relative_date, "rating": rating}
 
 
-def count_words(file):
+def count_words(reviews_set):
     co_occurrence_counts = Counter()
-    df = pd.read_csv(file)
 
-    if "review_text" not in df.columns:
-        raise KeyError("El archivo CSV debe contener una columna llamada 'review_text'.")
-
-    for review in df["review_text"].dropna():
-        clean_text = re.sub(noise_pattern, "", review.lower())
+    for review in reviews_set:
+        text = review.get("caption", "")
+        if not text:
+            continue
+        clean_text = re.sub(noise_pattern, "", text.lower())
         words = clean_text.split()
         filtered_words = [word for word in words if word not in stop_words]
         co_occurrence_counts.update(filtered_words)
@@ -149,7 +131,69 @@ def common_words(reviews):
 
     return most_common_dict
 
+def process_reviews(reviews_set):
 
-if __name__ == "__main__":
-    process_reviews("hotel_corto.csv")
+    num_processes = cpu_count()
+    print(f"Using {num_processes} processes in parallel")
 
+    if not reviews_set:
+        print("No reviews obtained")
+        return {}
+
+    with Manager() as manager:
+        shared_dict = manager.dict()
+        load_models(shared_dict)
+
+        with Pool(num_processes) as pool:
+
+            tasks = [
+                (review.get("id_review", idx), review.get("caption", ""), review.get("relative_date", ""), review.get("rating", ""), shared_dict)
+                for idx, review in enumerate(reviews_set)
+                if review.get("caption") and review.get("caption").strip()
+            ]
+
+            results = pool.starmap(analyze_review, tasks)
+
+        reviews_map = {review_id: data for review_id, data in results if review_id is not None}
+
+    print(f"Reviews map: {reviews_map}")
+    return reviews_map
+
+if __name__ == '__main__':
+    url = "https://www.google.com/maps/place/Yugo+Melbourn+Point+-+Cork+Student+Accommodation/@51.8879257,-8.535235,17z/data=!3m1!4b1!4m6!3m5!1s0x48449182ecd7bf3f:0x973ce1eed05f526d!8m2!3d51.8879257!4d-8.5326601!16s%2Fg%2F11nyqz7rvp?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
+    parser = argparse.ArgumentParser(description='Google Maps reviews scraper.')
+    parser.add_argument('--N', type=int, default=100, help='Number of reviews to scrape')
+    parser.add_argument('--i', type=str, default=URL, help='target URLs file')
+    parser.add_argument('--sort_by', type=str, default='newest', help='most_relevant, newest, highest_rating or lowest_rating')
+
+    args = parser.parse_args()
+
+    # store reviews in CSV file
+    url = "https://www.google.com/maps/place/Yugo+Melbourn+Point+-+Cork+Student+Accommodation/@51.8879257,-8.535235,17z/data=!4m8!3m7!1s0x48449182ecd7bf3f:0x973ce1eed05f526d!8m2!3d51.8879257!4d-8.5326601!9m1!1b1!16s%2Fg%2F11nyqz7rvp?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
+    with GoogleMapsScraper() as scraper:
+        error = scraper.sort_by(url, ind[args.sort_by])
+
+        if error == 0:
+
+            n = 0
+            while n < args.N:
+
+                # logging to std out
+                print(colored('[Review ' + str(n) + ']', 'cyan'))
+
+                reviews = scraper.get_reviews(n)
+                if len(reviews) == 0:
+                    break
+
+                for r in reviews:
+                    print(f"Review obtained: {r}")
+
+                n += len(reviews)
+
+    reviews_set = getReviews(url, 1000)
+    analyzed_reviews = process_reviews(reviews_set)
+    common_words= count_words(reviews_set)
+    print(json.dumps(analyzed_reviews, indent=2))
+
+    print("\nPalabras más comunes:")
+    print(f"Common Words: {common_words}")
