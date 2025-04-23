@@ -1,0 +1,16 @@
+# Core NLP and ML packages
+nltk
+transformers
+pandas
+matplotlib
+
+# Web scraping
+beautifulsoup4
+selenium
+webdriver-manager
+
+# Web framework
+flask
+
+# Utilities
+termcolor
