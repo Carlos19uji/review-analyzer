@@ -20,7 +20,7 @@ If you discover a security vulnerability in this project, we strongly encourage 
 🔐 **Please do not open a public issue.**  
 Instead, send a detailed report to:
 
-📧 **carlos.ripollesmotos@mycit.ie** *(replace this with your actual contact email)*
+📧 **carlos.ripollesmotos@mycit.ie** 
 
 ### What to include in your report:
 - A description of the vulnerability
