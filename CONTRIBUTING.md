@@ -56,6 +56,8 @@ If you find a bug, open an issue on GitHub with:
 - No harassment, discrimination or offensive behavior is tolerated.
 - Provide **constructive feedback** when reviewing code
 
+  You can see more information of the code of conduct in [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md)
+
 ## 📌 Need Help?
 If you have any questions, feel free to open an **issue** or reach out to  the maintainers.
 
