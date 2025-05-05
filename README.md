@@ -1,6 +1,6 @@
 
 # 📊 Business Reviews Analyzer
-[![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url][![Starts][stars-shield]][stars-url]
+[![Contributors][contributors-shield]][contributors-url]  [![Forks][forks-shield]][forks-url]  [![Starts][stars-shield]][stars-url]
 
 ## Introduction
 
@@ -15,28 +15,43 @@ Busines Reviews Analyzer is an open source application that retrieves and analyz
   
 ## Instalations
 
-1. **Clone the Repository**
-   
-  ```sh
-  git clone https://github.com/Carlos19uji/ReviewAnalyzer
-  ```
+### 📱 1. Install the Android App
 
-2. **Navigate to the Project Directory**
+  1. Download the review-analyzer.apk from the Releases section.
 
-    ```sh 
-    cd ReviewAnalyzer
-    ```
-3. **Install Dependencies**
+  2. Transfer the APK to your Android device or emulator
 
-    ```sh
-    pip install -r requirements.txt
-    ```
-    
-4. **Run the Application**
+  3. On your device:
 
-   ```sh
-    python main.py
-    ```
+      Go to Settings > Security and enable Install from unknown sources (if not already enabled).
+
+      Open the APK file and install the app.
+
+  4. Launch the app. You’ll be prompted to connect to the backend (see below).
+
+### 💻 2. Set Up the Python Backend
+
+  1. Download back-end.zip from the Releases.
+
+  2. Extract the contents to a folder of your choice.
+
+  3. Inside the extracted folder, move to analyze-reviews directory and run the appropriate script based on your operating system:
+
+On Windows:
+```
+run.bat
+```
+
+On Linux/macOS:
+```
+run.sh
+```
+
+This will:
+
+- Install the required Python dependencies (pip install -r requirements.txt)
+
+- Start the backend server
    
 ## 📖 Usage
 
@@ -59,12 +74,18 @@ We welcome contributins! To contribute:
 
 1. Fork the repository
 2. Create a new branch
+   ```
    git checkout -b feature-branch
-3. Commit your changes
+   ```
+4. Commit your changes
+   ```
    git commit -m "Add new feature"
-4. Push to your branch
+   ```
+6. Push to your branch
+   ```
    git push origin feature-branch
-5. Open a Pull Request
+   ```
+8. Open a Pull Request
 
 ## Used Models
 
