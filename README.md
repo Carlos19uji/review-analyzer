@@ -15,6 +15,13 @@ Busines Reviews Analyzer is an open source application that retrieves and analyz
   
 ## Instalations
 
+### 🔧 Prerequisites
+- Python 3.8 or later installed [download here](https://www.python.org/downloads/)
+
+- ✅ Ensure Python and pip are added to your system PATH
+
+- Ability to install Python packages using pip
+
 ### 📱 1. Install the Android App
 
   1. Download the review-analyzer.apk from the Releases section.
